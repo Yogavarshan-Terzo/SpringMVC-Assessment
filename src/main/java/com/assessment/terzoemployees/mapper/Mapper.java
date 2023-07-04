@@ -11,7 +11,6 @@ public class Mapper {
                 .photoUrl(employee.getPhotoUrl())
                 .email(employee.getEmail())
                 .designation(employee.getDesignation())
-                .roles(employee.getRoles())
                 .build();
         return employeeDto;
     }
@@ -23,7 +22,6 @@ public class Mapper {
                 .photoUrl(employeeDto.getPhotoUrl())
                 .email(employeeDto.getEmail())
                 .designation(employeeDto.getDesignation())
-                .roles(employeeDto.getRoles())
                 .build();
         return employee;
 

@@ -26,15 +26,12 @@ public class Employee {
     private String name;
     @NotEmpty(message = "Photo URL should not be empty")
     private String photoUrl;
-    private String password;
+    private String department;
     @NotEmpty(message = "Email should not be empty")
     private String email;
     @NotEmpty(message = "Designation should not be empty")
     private String designation;
     @CreationTimestamp
     private LocalDateTime joinedOn;
-    @ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
-    List<Role> roles;
-
 
 }

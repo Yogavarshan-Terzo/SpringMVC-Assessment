@@ -1,13 +1,17 @@
 package com.assessment.terzoemployees.models;
 
+import com.assessment.terzoemployees.models.UserEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "roles")
@@ -16,8 +20,6 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
     @ManyToMany(mappedBy = "roles")
-    List<Employee> employees;
-
+    private List<UserEntity> users = new ArrayList<>();
 }

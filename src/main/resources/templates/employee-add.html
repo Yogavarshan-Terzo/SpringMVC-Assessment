@@ -18,9 +18,9 @@
         <p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p>
       </div>
       <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password" >
-        <p th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}"></p>
+        <label for="department" class="form-label">Department</label>
+        <input type="text" class="form-control" id="department" name="department" >
+        <p th:if="${#fields.hasErrors('department')}" class="text-danger" th:errors="*{department}"></p>
       </div>
       <div class="mb-3">
         <label for="photoUrl" class="form-label">Photo URL</label>
