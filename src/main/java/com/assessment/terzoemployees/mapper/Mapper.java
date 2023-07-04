@@ -9,12 +9,23 @@ public class Mapper {
                 .id(employee.getId())
                 .name(employee.getName())
                 .photoUrl(employee.getPhotoUrl())
-                .joinedOn(employee.getJoinedOn())
                 .email(employee.getEmail())
                 .designation(employee.getDesignation())
-                .password(employee.getPassword())
                 .roles(employee.getRoles())
                 .build();
         return employeeDto;
+    }
+
+    public static Employee mapToEmployee(EmployeeDto employeeDto){
+        Employee employee = Employee.builder()
+                .id(employeeDto.getId())
+                .name(employeeDto.getName())
+                .photoUrl(employeeDto.getPhotoUrl())
+                .email(employeeDto.getEmail())
+                .designation(employeeDto.getDesignation())
+                .roles(employeeDto.getRoles())
+                .build();
+        return employee;
+
     }
 }

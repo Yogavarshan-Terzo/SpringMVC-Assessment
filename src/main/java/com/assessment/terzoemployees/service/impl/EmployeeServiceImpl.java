@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.assessment.terzoemployees.mapper.Mapper.mapToEmployee;
 import static com.assessment.terzoemployees.mapper.Mapper.mapToEmployeeDto;
 
 @Service
@@ -27,8 +28,31 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto findEmployeeByID(Long employeeId) {
-        EmployeeDto employeeDto = mapToEmployeeDto(employeeRepository.findById(employeeId).get());
-        return employeeDto;
+    public Employee findEmployeeByID(Long employeeId) {
+        Employee employee = employeeRepository.findById(employeeId).get();
+        return employee;
+    }
+
+    @Override
+    public void saveEmployee(Employee employee) {
+        employeeRepository.save(employee);
+    }
+
+    @Override
+    public EmployeeDto findClubById(Long employeeId) {
+        Employee employee = employeeRepository.findById(employeeId).get();
+        return mapToEmployeeDto(employee);
+    }
+
+    @Override
+    public void updateEmployee(EmployeeDto employeeDto) {
+        Employee employee = mapToEmployee(employeeDto);
+        employeeRepository.save(employee);
+    }
+
+    @Override
+    public void delete(EmployeeDto employeeDto) {
+        Employee employee=mapToEmployee(employeeDto);
+        employeeRepository.deleteById(employee.getId());
     }
 }

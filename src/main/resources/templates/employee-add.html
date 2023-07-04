@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
 
 <head>
   <meta charset="UTF-8">
@@ -8,37 +9,42 @@
 </head>
 
 <body>
-<div class="container">
-  <h1 class="mt-5">Create New Employee</h1>
-  <form th:action="@{/employees}" method="post">
-    <div class="mb-3">
-      <label for="name" class="form-label">Name</label>
-      <input type="text" class="form-control" id="name" name="name" required>
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" id="password" name="password" required>
-    </div>
-    <div class="mb-3">
-      <label for="photoUrl" class="form-label">Photo URL</label>
-      <input type="text" class="form-control" id="photoUrl" name="photoUrl" required>
-    </div>
-    <div class="mb-3">
-      <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control" id="email" name="email" required>
-    </div>
-    <div class="mb-3">
-      <label for="designation" class="form-label">Designation</label>
-      <input type="text" class="form-control" id="designation" name="designation" required>
-    </div>
-    <div class="mb-3">
-      <label for="joinedOn" class="form-label">Joined On</label>
-      <input type="datetime-local" class="form-control" id="joinedOn" name="joinedOn" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Create</button>
-    <a href="/employees" class="btn btn-secondary">Cancel</a>
-  </form>
-</div>
+  <div class="container">
+    <h1 class="mt-5">Create New Employee</h1>
+    <form th:action="@{/employees/new}" method="post" th:object="${employee}">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name" >
+        <p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" >
+        <p th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}"></p>
+      </div>
+      <div class="mb-3">
+        <label for="photoUrl" class="form-label">Photo URL</label>
+        <input type="text" class="form-control" id="photoUrl" name="photoUrl" >
+        <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" >
+        <p th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></p>
+      </div>
+      <div class="mb-3">
+        <label for="designation" class="form-label">Designation</label>
+        <input type="text" class="form-control" id="designation" name="designation" >
+        <p th:if="${#fields.hasErrors('designation')}" class="text-danger" th:errors="*{designation}"></p>
+      </div>
+      <div class="mb-3">
+        <label for="joinedOn" class="form-label">Joined On</label>
+        <input type="datetime-local" class="form-control" id="joinedOn" name="joinedOn" >
+        <p th:if="${#fields.hasErrors('joinedOn')}" class="text-danger" th:errors="*{joinedOn}"></p>
+      </div>
+      <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+  </div>
 </body>
 
 </html>

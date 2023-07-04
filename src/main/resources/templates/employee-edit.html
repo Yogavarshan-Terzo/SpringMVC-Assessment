@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Create New Employee</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+  <h1 class="mt-5">Edit Employee</h1>
+  <form method="post" th:action="@{/employees/{employeeId}/edit(employeeId=${employee.id})}" th:object="${employee}">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" name="name" th:field="*{name}">
+      <p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p>
+    </div>
+    <div class="mb-3">
+      <label for="photoUrl" class="form-label">Photo URL</label>
+      <input type="text" class="form-control" id="photoUrl" name="photoUrl" th:field="*{photoUrl}">
+      <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" name="email" th:field="*{email}" >
+      <p th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></p>
+    </div>
+    <div class="mb-3">
+      <label for="designation" class="form-label">Designation</label>
+      <input type="text" class="form-control" id="designation" name="designation" th:field="*{designation}">
+      <p th:if="${#fields.hasErrors('designation')}" class="text-danger" th:errors="*{designation}"></p>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+</div>
+</body>
+
+</html>

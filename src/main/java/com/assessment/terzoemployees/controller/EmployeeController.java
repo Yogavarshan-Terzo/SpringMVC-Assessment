@@ -3,6 +3,7 @@ package com.assessment.terzoemployees.controller;
 import com.assessment.terzoemployees.dto.EmployeeDto;
 import com.assessment.terzoemployees.models.Employee;
 import com.assessment.terzoemployees.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,8 +32,8 @@ public class EmployeeController {
 
     @GetMapping("employees/{employeeId}")
     public String employeeDetails(@PathVariable("employeeId") Long employeeId,Model model){
-        EmployeeDto employeeDto = employeeService.findEmployeeByID(employeeId);
-        model.addAttribute("employee",employeeDto);
+        Employee employee = employeeService.findEmployeeByID(employeeId);
+        model.addAttribute("employee",employee);
         return "employee-detail";
     }
     @GetMapping("/employees/new")
@@ -41,13 +42,44 @@ public class EmployeeController {
         model.addAttribute("employee",employee);
         return "employee-add";
     }
-//    @PostMapping("/employees/new")
-//    public String saveClub(@Valid @ModelAttribute("club") EmployeeDto employeeDto, BindingResult result, Model model){
-//        if(result.hasErrors()){
-//            model.addAttribute("club",employeeDto);
-//            return "employee-create";
-//        }
-//        employeeService.saveEmployee(clubDto);
-//        return "redirect:/clubs";
-//    }
+    @PostMapping("/employees/new")
+    public String saveClub(@Valid @ModelAttribute("employee") Employee employee, BindingResult result, Model model){
+        if(result.hasErrors()){
+            model.addAttribute("employee",employee);
+            return "employee-add";
+        }
+        employeeService.saveEmployee(employee);
+        return "redirect:/employees";
+    }
+
+    @GetMapping("/employees/{employeeId}/edit")
+    public String editEmployeeForm(@PathVariable("employeeId") Long employeeId, Model model ){
+        EmployeeDto employeeDto = employeeService.findClubById(employeeId);
+        model.addAttribute("employee",employeeDto);
+        return "employee-edit";
+    }
+    @PostMapping("/employees/{employeeId}/edit")
+    public String updateEmployee(@PathVariable("employeeId") Long employeeId, @Valid @ModelAttribute("employee") EmployeeDto employeeDto, BindingResult result, Model model){
+        if(result.hasErrors()){
+            model.addAttribute("employee",employeeDto);
+            return "employee-edit";
+        }
+        employeeDto.setId(employeeId);
+        employeeService.updateEmployee(employeeDto);
+        return "redirect:/employees";
+    }
+    @GetMapping("/employees/{employeeId}/delete")
+    public String deleteEmployeeRedirect(@PathVariable("employeeId") Long employeeId, Model model ){
+        EmployeeDto employeeDto = employeeService.findClubById(employeeId);
+        model.addAttribute("employee",employeeDto);
+        return "employee-detail-delete";
+    }
+
+    @GetMapping("/employees/{employeeId}/confirm/delete")
+    public String deleteEmployee(@PathVariable("employeeId") Long employeeId, Model model ){
+        EmployeeDto employeeDto = employeeService.findClubById(employeeId);
+        employeeService.delete(employeeDto);
+        return "redirect:/employees";
+    }
+
 }
