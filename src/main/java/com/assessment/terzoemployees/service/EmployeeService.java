@@ -16,4 +16,6 @@ public interface EmployeeService {
 
     void updateEmployee(EmployeeDto employeeDto);
     void delete(EmployeeDto employeeDto);
+
+    List<EmployeeDto> searchEmployees(String query);
 }

@@ -13,8 +13,8 @@
 <body>
 <section layout:fragment="body" class="py-5">
 <div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-lg-6">
+  <div class="row justify-content-center mt-2">
+    <div class="col-lg-5">
       <div class="card">
         <img th:src="${employee.photoUrl}" class="card-img-top" alt="Employee Photo">
         <div class="card-body">
@@ -23,6 +23,7 @@
           <p><strong>Email:</strong> <span th:text="${employee.email}"></span></p>
           <p><strong>Designation:</strong> <span th:text="${employee.designation}"></span></p>
           <p><strong>Joined On:</strong> <span th:text="${employee.joinedOn}"></span></p>
+          <p><strong>Address:</strong> <span th:text="${employee.address}"></span></p>
         </div>
         <div class="card-footer">
           <a th:href="@{/employees/{employeeId}/edit(employeeId=${employee.id})}" class="btn btn-primary">Edit</a>

@@ -33,5 +33,5 @@ public class Employee {
     private String designation;
     @CreationTimestamp
     private LocalDateTime joinedOn;
-
+    private String address;
 }

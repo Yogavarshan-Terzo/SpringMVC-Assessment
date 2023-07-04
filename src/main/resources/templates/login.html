@@ -1,7 +1,7 @@
 <html
         xmlns:th="http://thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout}">
+        layout:decorate="~{layout1.html}">
 <head>
   <title>Register</title>
 </head>
@@ -35,6 +35,9 @@
   </style>
   <div class="main">
     <div class="col-md-6 col-sm-12">
+      <br><br>
+      <br><br>
+      <br><br>
       <div th:if="${param.error}" class="alert alert-success">
         Invalid username and password.
       </div>
@@ -66,5 +69,9 @@
       </div>
     </div>
   </div>
+  <br><br><br><br><br><br>
+  <br><br><br><br><br><br>
+  <br><br>
+
 </section>
 </html>

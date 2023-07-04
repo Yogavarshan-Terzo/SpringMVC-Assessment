@@ -2,30 +2,39 @@ package com.assessment.terzoemployees.controller;
 
 import com.assessment.terzoemployees.dto.EmployeeDto;
 import com.assessment.terzoemployees.models.Employee;
+import com.assessment.terzoemployees.models.UserEntity;
+import com.assessment.terzoemployees.security.SecurityUtil;
 import com.assessment.terzoemployees.service.EmployeeService;
+import com.assessment.terzoemployees.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
 public class EmployeeController {
     EmployeeService employeeService;
+    UserService userService;
     @Autowired
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, UserService userService) {
         this.employeeService = employeeService;
+        this.userService = userService;
     }
 
     @GetMapping("/employees")
     public String listEmployees(Model model){
+        UserEntity user = new UserEntity();
         List<EmployeeDto> employees= employeeService.getAllEmployees();
+        String username = SecurityUtil.getSessionUser();
+        if(username != null) {
+            user = userService.findByUserName(username);
+            model.addAttribute("user", user);
+        }
+        model.addAttribute("user", user);
         model.addAttribute("employees",employees);
         return "employees";
     }
@@ -80,6 +89,12 @@ public class EmployeeController {
         EmployeeDto employeeDto = employeeService.findClubById(employeeId);
         employeeService.delete(employeeDto);
         return "redirect:/employees";
+    }
+    @GetMapping("/employees/search")
+    public String searchClubs(@RequestParam(value = "query") String query, Model model){
+        List<EmployeeDto> employees = employeeService.searchEmployees(query);
+        model.addAttribute("employees",employees);
+        return "employees";
     }
 
 }

@@ -14,33 +14,38 @@
     <form th:action="@{/employees/new}" method="post" th:object="${employee}">
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control" id="name" name="name" >
+        <input type="text" class="form-control" id="name" name="name" th:field="*{name}" >
         <p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p>
       </div>
       <div class="mb-3">
         <label for="department" class="form-label">Department</label>
-        <input type="text" class="form-control" id="department" name="department" >
+        <input type="text" class="form-control" id="department" name="department" th:field="*{department}" >
         <p th:if="${#fields.hasErrors('department')}" class="text-danger" th:errors="*{department}"></p>
       </div>
       <div class="mb-3">
         <label for="photoUrl" class="form-label">Photo URL</label>
-        <input type="text" class="form-control" id="photoUrl" name="photoUrl" >
+        <input type="text" class="form-control" id="photoUrl" name="photoUrl" th:field="*{photoUrl}" >
         <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" >
+        <input type="email" class="form-control" id="email" name="email" th:field="*{email}">
         <p th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></p>
       </div>
       <div class="mb-3">
         <label for="designation" class="form-label">Designation</label>
-        <input type="text" class="form-control" id="designation" name="designation" >
+        <input type="text" class="form-control" id="designation" name="designation" th:field="*{designation}">
         <p th:if="${#fields.hasErrors('designation')}" class="text-danger" th:errors="*{designation}"></p>
       </div>
       <div class="mb-3">
         <label for="joinedOn" class="form-label">Joined On</label>
-        <input type="datetime-local" class="form-control" id="joinedOn" name="joinedOn" >
+        <input type="datetime-local" class="form-control" id="joinedOn" name="joinedOn" th:field="*{joinedOn}" >
         <p th:if="${#fields.hasErrors('joinedOn')}" class="text-danger" th:errors="*{joinedOn}"></p>
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <input type="text" class="form-control" id="address" name="address" th:field="*{address}" >
+        <p th:if="${#fields.hasErrors('address')}" class="text-danger" th:errors="*{address}"></p>
       </div>
       <button type="submit" class="btn btn-primary">Create</button>
     </form>
